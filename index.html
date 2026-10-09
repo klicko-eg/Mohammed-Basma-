@@ -12,7 +12,9 @@
             box-sizing: border-box;
         }
         body {
-            background-color: #0b0b0b;
+            /* صورة بوكيه الورد مالية الشاشة كخلفية فخمة بالكامل */
+            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.75)), url('IMG-20261009-WA0002.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: #fff;
             font-family: 'Plus Jakarta Sans', sans-serif;
             text-align: center;
@@ -24,13 +26,15 @@
             padding: 20px;
         }
         .invitation-card {
-            background: rgba(18, 18, 18, 0.98);
+            background: rgba(15, 15, 15, 0.75);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             width: 100%;
             max-width: 480px;
-            padding: 35px 25px;
+            padding: 40px 25px;
             border-radius: 30px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
-            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            border: 1px solid rgba(212, 175, 55, 0.5);
             position: relative;
             overflow: hidden;
         }
@@ -43,62 +47,46 @@
             height: 4px;
             background: linear-gradient(90deg, #d4af37, #fff, #d4af37);
         }
-        /* تصميم دائرة الصورة بوضوح تام وبحجم كبير */
-        .photo-container {
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 20px auto;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3.5px solid #d4af37;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
-            background: #222;
-        }
-        .photo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
         .top-tag {
             font-family: 'Cinzel', serif;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             letter-spacing: 4px;
             color: #d4af37;
             text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
         h1 {
             font-family: 'Alex Brush', cursive;
             color: #fff;
-            font-size: 3.2rem;
+            font-size: 3.5rem;
             margin-bottom: 2px;
-            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+            text-shadow: 0 2px 15px rgba(212, 175, 55, 0.5);
         }
         .subtitle {
-            font-size: 0.9rem;
-            color: #dcdcdc;
+            font-size: 0.95rem;
+            color: #e0e0e0;
             margin-bottom: 25px;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
         .event-box {
-            background: rgba(255, 255, 255, 0.04);
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 22px;
             border-radius: 18px;
             margin-bottom: 25px;
             text-align: left;
             border-left: 3px solid #d4af37;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
         }
         .event-box p {
-            margin: 8px 0;
+            margin: 9px 0;
             font-size: 0.95rem;
             color: #f1f1f1;
             display: flex;
             justify-content: space-between;
         }
         .event-box strong {
-            color: #d4af37;
+            color: #f3e5ab;
             font-family: 'Cinzel', serif;
         }
         .countdown {
@@ -108,38 +96,38 @@
             margin-bottom: 25px;
         }
         .time-box {
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.4);
             color: #fff;
-            padding: 10px 5px;
+            padding: 12px 5px;
             border-radius: 14px;
             flex: 1;
         }
         .time-box span {
             display: block;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: #d4af37;
+            color: #f3e5ab;
             font-family: 'Cinzel', serif;
         }
         .time-box label {
             font-size: 0.65rem;
-            color: #bbb;
+            color: #ccc;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         .btn {
             display: block;
             width: 100%;
-            padding: 14px;
+            padding: 15px;
             background: linear-gradient(135deg, #d4af37, #aa771c);
             color: white;
             text-decoration: none;
             border-radius: 14px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.05rem;
             transition: 0.4s;
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
             letter-spacing: 1px;
         }
         .btn:hover {
@@ -147,9 +135,9 @@
             background: linear-gradient(135deg, #e6c547, #d4af37);
         }
         .footer-note {
-            margin-top: 20px;
-            font-size: 0.8rem;
-            color: #aaa;
+            margin-top: 22px;
+            font-size: 0.85rem;
+            color: #ccc;
             letter-spacing: 1px;
             font-style: italic;
         }
@@ -158,11 +146,6 @@
 <body>
 
     <div class="invitation-card">
-        <!-- صورة بوكيه الورد واضحة وبحجم كبير في المنتصف -->
-        <div class="photo-container">
-            <img src="IMG-20261009-WA0002.jpg" alt="Engagement Photo">
-        </div>
-
         <div class="top-tag">Save The Date</div>
         <h1>Mohammed & Basma</h1>
         <p class="subtitle">Engagement Celebration</p>
