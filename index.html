@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة خطوبة محمد وبسمة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Amiri:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #fdfbf7;
+            color: #2c3e50;
+            font-family: 'Cairo', sans-serif;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 450px;
+            padding: 40px 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid #f0e6d2;
+        }
+        h1 {
+            font-family: 'Amiri', serif;
+            color: #b8860b;
+            font-size: 2.3rem;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        .details {
+            background: #fdf8f0;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            text-align: right;
+            border-right: 4px solid #b8860b;
+        }
+        .details p {
+            margin: 8px 0;
+            font-size: 1.05rem;
+            color: #444;
+        }
+        .countdown {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+        .time-box {
+            background: #2c3e50;
+            color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            width: 70px;
+        }
+        .time-box span {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        .time-box label {
+            font-size: 0.8rem;
+            color: #ddd;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #b8860b;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #996f05;
+        }
+        .footer-note {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>حفل خطوبة محمد & بسمة</h1>
+        <p class="subtitle">يسعدنا حضوركم لتشاركوا معنا أجمل لحظات حياتنا</p>
+
+        <div class="details">
+            <p><strong>العروسين:</strong> محمد & بسمة</p>
+            <p><strong>الموعد:</strong> الخميس 15 أكتوبر 2026 - الساعة 7:00 مساءً</p>
+            <p><strong>المكان:</strong> قاعة الماسة - طريق هرية الجديد</p>
+        </div>
+
+        <!-- العداد التنازلي -->
+        <div class="countdown">
+            <div class="time-box">
+                <span id="days">00</span>
+                <label>يوم</label>
+            </div>
+            <div class="time-box">
+                <span id="hours">00</span>
+                <label>ساعة</label>
+            </div>
+            <div class="time-box">
+                <span id="minutes">00</span>
+                <label>دقيقة</label>
+            </div>
+            <div class="time-box">
+                <span id="seconds">00</span>
+                <label>ثانية</label>
+            </div>
+        </div>
+
+        <!-- زر الخريطة المباشر -->
+        <a href="https://maps.app.goo.gl/GaNHBGjJ3XEsS8NcA" target="_blank" class="btn">📍 افتح قاعة الماسة على الخريطة</a>
+        
+        <p class="footer-note">وجودكم يكتمل به فرحنا ✨</p>
+    </div>
+
+    <script>
+        // تاريخ الحفل: 15 أكتوبر 2026 الساعة 7 مساءً
+        const eventDate = new Date("October 15, 2026 19:00:00").getTime();
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.querySelector(".countdown").innerHTML = "<h3>لقد بدأت الاحتفالات! نورتونا</h3>";
+                return;
+            }
+
+            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+        }, 1000);
+    </script>
+
+</body>
+</html>
