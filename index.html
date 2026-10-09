@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohammed & Basma's Engagement</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>The Engagement | Mohammed & Basma</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Alex+Brush&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,11 +12,11 @@
             box-sizing: border-box;
         }
         body {
-            /* تم ربط اسم الصورة بدقة هنا */
-            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('IMG-20261009-WA0002.jpg') no-repeat center center fixed;
+            /* خلفية صورة الورد مع طبقة تظليل احترافية مخصصة لإبراز الجمال */
+            background: linear-gradient(135deg, rgba(15, 15, 15, 0.85), rgba(30, 20, 10, 0.8)), url('IMG-20261009-WA0002.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             text-align: center;
             min-height: 100vh;
             display: flex;
@@ -25,108 +25,136 @@
             align-items: center;
             padding: 20px;
         }
-        .card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+        .invitation-card {
+            background: rgba(20, 20, 20, 0.65);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             width: 100%;
             max-width: 480px;
-            padding: 40px 25px;
-            border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 45px 30px;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        .invitation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #d4af37, #fff, #d4af37);
+        }
+        .top-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            color: #d4af37;
+            text-transform: uppercase;
+            margin-bottom: 15px;
         }
         h1 {
-            font-family: 'Playfair Display', serif;
-            color: #f3e5ab;
-            font-size: 2.8rem;
+            font-family: 'Alex Brush', cursive;
+            color: #fff;
+            font-size: 3.5rem;
             margin-bottom: 5px;
-            font-weight: 700;
+            text-shadow: 0 2px 15px rgba(212, 175, 55, 0.4);
         }
         .subtitle {
-            font-size: 1rem;
-            color: #e0e0e0;
-            margin-bottom: 25px;
+            font-size: 0.95rem;
+            color: #dcdcdc;
+            margin-bottom: 30px;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
-        .details {
-            background: rgba(0, 0, 0, 0.35);
-            padding: 20px;
-            border-radius: 15px;
+        .event-box {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 22px;
+            border-radius: 18px;
             margin-bottom: 25px;
             text-align: left;
-            border-left: 4px solid #f3e5ab;
+            border-left: 3px solid #d4af37;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .details p {
-            margin: 8px 0;
+        .event-box p {
+            margin: 10px 0;
             font-size: 1rem;
-            color: #f5f5f5;
+            color: #f1f1f1;
+            display: flex;
+            justify-content: space-between;
         }
-        .details strong {
-            color: #f3e5ab;
+        .event-box strong {
+            color: #d4af37;
+            font-family: 'Cinzel', serif;
         }
         .countdown {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
+            gap: 10px;
             margin-bottom: 30px;
         }
         .time-box {
-            background: rgba(243, 229, 171, 0.15);
-            border: 1px solid rgba(243, 229, 171, 0.3);
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
             color: #fff;
-            padding: 12px 8px;
-            border-radius: 12px;
-            width: 75px;
+            padding: 12px 5px;
+            border-radius: 14px;
+            flex: 1;
         }
         .time-box span {
             display: block;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: #f3e5ab;
+            color: #d4af37;
+            font-family: 'Cinzel', serif;
         }
         .time-box label {
-            font-size: 0.75rem;
-            color: #ccc;
+            font-size: 0.7rem;
+            color: #bbb;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
         .btn {
             display: block;
             width: 100%;
-            padding: 14px;
+            padding: 15px;
             background: linear-gradient(135deg, #d4af37, #aa771c);
             color: white;
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 14px;
             font-weight: 600;
             font-size: 1.05rem;
-            transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+            transition: 0.4s;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+            letter-spacing: 1px;
         }
         .btn:hover {
-            transform: translateY(-2px);
-            background: linear-gradient(135deg, #e6c547, #b8860b);
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, #e6c547, #d4af37);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.5);
         }
         .footer-note {
-            mt: 25px;
             margin-top: 25px;
             font-size: 0.85rem;
             color: #aaa;
             letter-spacing: 1px;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
+    <div class="invitation-card">
+        <div class="top-tag">Save The Date</div>
         <h1>Mohammed & Basma</h1>
-        <p class="subtitle">Engagement Invitation</p>
+        <p class="subtitle">Engagement Celebration</p>
 
-        <div class="details">
-            <p><strong>Date:</strong> Thursday, Oct 15, 2026</p>
-            <p><strong>Time:</strong> 7:00 PM</p>
-            <p><strong>Venue:</strong> Al-Masa Hall, New Horeya Rd</p>
+        <div class="event-box">
+            <p><span>Date:</span> <strong>Thursday, Oct 15</strong></p>
+            <p><span>Time:</span> <strong>7:00 PM</strong></p>
+            <p><span>Venue:</span> <strong>Al-Masa Hall</strong></p>
         </div>
 
         <!-- العداد التنازلي -->
@@ -150,7 +178,7 @@
         </div>
 
         <!-- زر الخريطة -->
-        <a href="https://maps.app.goo.gl/GaNHBGjJ3XEsS8NcA" target="_blank" class="btn">📍 Open Location on Map</a>
+        <a href="https://maps.app.goo.gl/GaNHBGjJ3XEsS8NcA" target="_blank" class="btn">📍 View Venue Map</a>
         
         <p class="footer-note">We would be honored by your presence ✨</p>
     </div>
