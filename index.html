@@ -23,58 +23,60 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            overflow-x: hidden;
+            overflow: hidden;
+            position: relative;
         }
 
-        /* شاشة الغلاف التفاعلية (البداية) */
+        /* شاشة الغلاف وصندوق الهدية */
         #cover-screen {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(5, 5, 5, 0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            width: 100vw;
+            height: 100vh;
+            background: rgba(8, 8, 8, 0.95);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 999;
+            z-index: 9999;
             transition: opacity 0.8s ease, transform 0.8s ease;
             padding: 20px;
         }
         .gift-box {
-            font-size: 5rem;
-            animation: bounce 2s infinite;
+            font-size: 5.5rem;
+            animation: bounce 1.8s infinite;
             cursor: pointer;
-            margin-bottom: 20px;
-            text-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+            margin-bottom: 15px;
+            text-shadow: 0 0 35px rgba(212, 175, 55, 0.7);
+            user-select: none;
         }
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-15px); }
-            60% { transform: translateY(-7px); }
+            40% { transform: translateY(-18px); }
+            60% { transform: translateY(-9px); }
         }
         .cover-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             color: #f3e5ab;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: 700;
         }
         .cover-subtitle {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #ccc;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
+            letter-spacing: 3px;
+            margin-bottom: 25px;
             text-transform: uppercase;
         }
         .open-btn {
             background: linear-gradient(135deg, #f3e5ab, #d4af37, #aa771c);
             color: #111;
             border: none;
-            padding: 14px 35px;
+            padding: 15px 38px;
             font-size: 1.1rem;
             font-weight: 700;
             border-radius: 30px;
@@ -88,7 +90,28 @@
             box-shadow: 0 15px 40px rgba(212, 175, 55, 0.8);
         }
 
-        /* كارت الدعوة الأصلي */
+        /* تأثير القلوب المتطايرة */
+        .floating-heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 24px;
+            animation: flyUp 3s linear forwards;
+            z-index: 9998;
+            user-select: none;
+            pointer-events: none;
+        }
+        @keyframes flyUp {
+            0% {
+                transform: translateY(0) scale(0.5) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.4) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* كارت الدعوة الرئيسي */
         .invitation-card {
             background: rgba(10, 10, 10, 0.6);
             backdrop-filter: blur(14px);
@@ -220,7 +243,7 @@
 </head>
 <body>
 
-    <!-- شاشة البداية والتفاعل -->
+    <!-- شاشة البداية وصندوق الهدية التفاعلي -->
     <div id="cover-screen">
         <div class="gift-box" onclick="openInvitation()">🎁</div>
         <div class="cover-title">Mohammed & Basma</div>
@@ -276,7 +299,25 @@
     </div>
 
     <script>
+        function createHearts() {
+            const symbols = ['❤️', '✨', '💖', '⭐', '🌹', '💛'];
+            for (let i = 0; i < 25; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+            }
+        }
+
         function openInvitation() {
+            createHearts();
             const cover = document.getElementById('cover-screen');
             const body = document.body;
 
