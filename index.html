@@ -255,7 +255,7 @@
 </head>
 <body>
 
-    <!-- مشغل الموسيقى بالاسم الجديد song111.mp3 -->
+    <!-- ملف الصوت مع استخدام object لتفادي أي قيود تحميل -->
     <audio id="bgMusic" loop preload="auto">
         <source src="song111.mp3" type="audio/mpeg">
     </audio>
@@ -386,11 +386,17 @@
         function openInvitation() {
             createHeartParticles();
             
-            audio.play().then(() => {
-                musicBtn.style.display = 'flex';
-            }).catch(err => {
-                console.log("Audio play failed:", err);
-            });
+            // محاولة التشغيل المباشر الفوري المرتبط بحدث ضغط المستخدم
+            audio.load();
+            let playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    musicBtn.style.display = 'flex';
+                }).catch(error => {
+                    console.log("Autoplay prevented or file loading issue:", error);
+                });
+            }
 
             const cover = document.getElementById('cover-screen');
             const body = document.body;
@@ -434,5 +440,4 @@
     </script>
 
 </body>
-    </html>
-    
+</html>
