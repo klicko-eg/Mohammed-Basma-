@@ -229,38 +229,23 @@
             text-shadow: 0 2px 5px rgba(0,0,0,0.8);
         }
         
-        .music-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(12, 12, 12, 0.8);
-            border: 1px solid rgba(243, 229, 171, 0.6);
-            color: #f3e5ab;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            z-index: 10000;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            transition: 0.3s;
-        }
-        .music-btn:hover {
-            transform: scale(1.1);
+        /* مشغل يوتيوب مخفي تماماً */
+        #youtube-audio-container {
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
 
-    <!-- ملف الصوت مع استخدام object لتفادي أي قيود تحميل -->
-    <audio id="bgMusic" loop preload="auto">
-        <source src="song111.mp3" type="audio/mpeg">
-    </audio>
-
-    <div class="music-btn" id="musicToggle" onclick="toggleMusic()" style="display: none;">🎵</div>
+    <!-- مشغل يوتيوب مخفي يبدأ من الدقيقة 1:15 (75 ثانية) -->
+    <div id="youtube-audio-container">
+        <iframe id="ytPlayer" width="1" height="1" src="" frameborder="0" allow="autoplay"></iframe>
+    </div>
 
     <canvas id="heart-canvas"></canvas>
 
@@ -380,23 +365,12 @@
         }
         animateHearts();
 
-        const audio = document.getElementById('bgMusic');
-        const musicBtn = document.getElementById('musicToggle');
-
         function openInvitation() {
             createHeartParticles();
             
-            // محاولة التشغيل المباشر الفوري المرتبط بحدث ضغط المستخدم
-            audio.load();
-            let playPromise = audio.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    musicBtn.style.display = 'flex';
-                }).catch(error => {
-                    console.log("Autoplay prevented or file loading issue:", error);
-                });
-            }
+            // تشغيل الأغنية من يوتيوب فوراً من الدقيقة 1:15 (75 ثانية) عند تفاعل المستخدم
+            const ytPlayer = document.getElementById('ytPlayer');
+            ytPlayer.src = "https://www.youtube.com/embed/hBmaUbcP3q0?autoplay=1&start=75";
 
             const cover = document.getElementById('cover-screen');
             const body = document.body;
@@ -410,24 +384,13 @@
             }, 800);
         }
 
-        function toggleMusic() {
-            if (audio.paused) {
-                audio.play();
-                musicBtn.innerHTML = "🎵";
-            } else {
-                audio.pause();
-                musicBtn.innerHTML = "🔇";
-            }
-        }
-
         const eventDate = new Date("October 15, 2026 19:00:00").getTime();
 
-        const timer = setInterval(function() {
+        const timer = sessionStorage.getItem('timerSet') || setInterval(function() {
             const now = new Date().getTime();
             const distance = eventDate - now;
 
             if (distance < 0) {
-                clearInterval(timer);
                 document.querySelector(".countdown").innerHTML = "<h3>The Celebration Has Begun! 🎉</h3>";
                 return;
             }
