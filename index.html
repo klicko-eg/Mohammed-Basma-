@@ -229,23 +229,38 @@
             text-shadow: 0 2px 5px rgba(0,0,0,0.8);
         }
         
-        /* مشغل يوتيوب مخفي تماماً */
-        #youtube-audio-container {
-            position: absolute;
-            width: 0;
-            height: 0;
-            overflow: hidden;
-            opacity: 0;
-            pointer-events: none;
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(12, 12, 12, 0.8);
+            border: 1px solid rgba(243, 229, 171, 0.6);
+            color: #f3e5ab;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            transition: 0.3s;
+        }
+        .music-btn:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
 
-    <!-- مشغل يوتيوب مخفي يبدأ من الدقيقة 1:15 (75 ثانية) -->
-    <div id="youtube-audio-container">
-        <iframe id="ytPlayer" width="1" height="1" src="" frameborder="0" allow="autoplay"></iframe>
-    </div>
+    <!-- مشغل صوت نظيف بدون أي إعلانات (تأكد أن ملف الأغنية مرفوع باسم song111.mp3 على جيت هاب) -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="song111.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="music-btn" id="musicToggle" onclick="toggleMusic()" style="display: none;">🎵</div>
 
     <canvas id="heart-canvas"></canvas>
 
@@ -306,6 +321,128 @@
 
     <script>
         const canvas = document.getElementById('heart-canvas');
+        const ctx = canvas.getContext('2d');
+        let hearts = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function createHeartParticles() {
+            for (let i = 0; i < 45; i++) {
+                hearts.push({
+                    x: Math.random() * window.innerWidth,
+                    y: window.innerHeight + Math.random() * 100,
+                    size: Math.random() * 10 + 6,
+                    speedY: Math.random() * 2 + 1.5,
+                    speedX: (Math.random() - 0.5) * 1.5,
+                    opacity: Math.random() * 0.6 + 0.4,
+                    color: Math.random() > 0.4 ? '#f3e5ab' : '#ff3366'
+                });
+            }
+        }
+
+        function drawVectorHeart(x, y, size, color, opacity) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.globalAlpha = opacity;
+            ctx.fillStyle = color;
+            ctx.shadowColor = color;
+            ctx.shadowBlur = 12;
+            
+            ctx.beginPath();
+            let d = size;
+            ctx.moveTo(0, d / 3);
+            ctx.bezierCurveTo(-d, -d / 2, -d * 1.2, d / 2, 0, d * 1.5);
+            ctx.bezierCurveTo(d * 1.2, d / 2, d, -d / 2, 0, d / 3);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function animateHearts() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            hearts.forEach((h, index) => {
+                h.y -= h.speedY;
+                h.x += h.speedX + Math.sin(h.y / 30) * 0.5;
+                h.opacity -= 0.002;
+
+                if (h.opacity <= 0 || h.y < -50) {
+                    hearts.splice(index, 1);
+                } else {
+                    drawVectorHeart(h.x, h.y, h.size, h.color, h.opacity);
+                }
+            });
+            requestAnimationFrame(animateHearts);
+        }
+        animateHearts();
+
+        const audio = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicToggle');
+        
+        // ضبط نقطة البداية من الدقيقة 1 و15 ثانية (75 ثانية)
+        audio.addEventListener('loadedmetadata', function() {
+            audio.currentTime = 75;
+        });
+
+        function openInvitation() {
+            createHeartParticles();
+            
+            // ضبط الوقت عند الفتح للتاكيد والتشغيل الفوري
+            audio.currentTime = 75;
+            audio.play().then(() => {
+                musicBtn.style.display = 'flex';
+            }).catch(err => {
+                console.log("Audio play blocked:", err);
+            });
+
+            const cover = document.getElementById('cover-screen');
+            const body = document.body;
+
+            cover.style.opacity = '0';
+            cover.style.transform = 'scale(1.1)';
+            
+            setTimeout(() => {
+                cover.style.display = 'none';
+                body.classList.add('show-card');
+            }, 800);
+        }
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                musicBtn.innerHTML = "🎵";
+            } else {
+                audio.pause();
+                musicBtn.innerHTML = "🔇";
+            }
+        }
+
+        const eventDate = new Date("October 15, 2026 19:00:00").getTime();
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.querySelector(".countdown").innerHTML = "<h3>The Celebration Has Begun! 🎉</h3>";
+                return;
+            }
+
+            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
+            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+        }, 1000);
+    </script>
+
+</body>
+</html>
+entById('heart-canvas');
         const ctx = canvas.getContext('2d');
         let hearts = [];
 
