@@ -12,6 +12,7 @@
             box-sizing: border-box;
         }
         body {
+            /* خلفية بوكيه الورد بوضوح وفخامة */
             background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.65)), url('IMG-20261009-WA0002.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
@@ -257,10 +258,9 @@
 </head>
 <body>
 
-    <!-- مشغل الموسيقى بالاسم الكامل المستخرج من الملف المرفوع -->
-    <audio id="bgMusic" loop>
-        <source src="A@ أحلي قرار بجد مع فيري قلبي" type="audio/mpeg">
-        <source src="A@ أحلي قرار بجد مع فيري قلبي.mp3" type="audio/mpeg">
+    <!-- مشغل الموسيقى بمسار الملف الأصلي بالضبط مع ترميز الروابط -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="احلي%20قرار%20بجد%20مع%20فيري%20قلبي%20@Ahmed%20Farid.mp3" type="audio/mpeg">
     </audio>
 
     <div class="music-btn" id="musicToggle" onclick="toggleMusic()" style="display: none;">🎵</div>
@@ -437,4 +437,5 @@
     </script>
 
 </body>
-</html>
+    </html>
+    
