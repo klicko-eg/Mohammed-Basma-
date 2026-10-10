@@ -89,7 +89,7 @@
             box-shadow: 0 15px 40px rgba(212, 175, 55, 0.8);
         }
 
-        /* كلاس الكانفاس الخاص بالقلوب السريعة بدون أي تهنيج */
+        /* كلاس الكانفاس الخاص بالقلوب الاحترافية */
         #heart-canvas {
             position: fixed;
             top: 0;
@@ -293,7 +293,6 @@
     </div>
 
     <script>
-        // إعداد نظام القلوب Vector الناعمة والسريعة جداً بدون تهنيج
         const canvas = document.getElementById('heart-canvas');
         const ctx = canvas.getContext('2d');
         let hearts = [];
@@ -306,29 +305,36 @@
         resizeCanvas();
 
         function createHeartParticles() {
-            for (let i = 0; i < 40; i++) {
+            for (let i = 0; i < 45; i++) {
                 hearts.push({
-                    x: window.innerWidth / 2 + (Math.random() - 0.5) * 100,
-                    y: window.innerHeight + Math.random() * 50,
-                    size: Math.random() * 12 + 8,
-                    speedY: Math.random() * 3 + 2,
-                    speedX: (Math.random() - 0.5) * 2,
-                    opacity: Math.random() * 0.7 + 0.3,
-                    color: Math.random() > 0.3 ? '#f3e5ab' : '#ff4d6d'
+                    x: Math.random() * window.innerWidth,
+                    y: window.innerHeight + Math.random() * 100,
+                    size: Math.random() * 10 + 6,
+                    speedY: Math.random() * 2 + 1.5,
+                    speedX: (Math.random() - 0.5) * 1.5,
+                    opacity: Math.random() * 0.6 + 0.4,
+                    color: Math.random() > 0.4 ? '#f3e5ab' : '#ff3366',
+                    angle: Math.random() * Math.PI * 2,
+                    spin: (Math.random() - 0.5) * 0.03
                 });
             }
         }
 
-        function drawHeart(x, y, size, color, opacity) {
+        // رسم قلب هندسي احترافي (Vector Heart Path) ناعم جداً
+        function drawVectorHeart(x, y, size, color, opacity) {
             ctx.save();
-            ctx.beginPath();
+            ctx.translate(x, y);
             ctx.globalAlpha = opacity;
             ctx.fillStyle = color;
             ctx.shadowColor = color;
-            ctx.shadowBlur = 10;
-            ctx.moveTo(x, y);
-            ctx.bezierCurveTo(x - size, y - size, x - size * 1.5, y + size / 3, x, y + size * 1.2);
-            ctx.bezierCurveTo(x + size * 1.5, y + size / 3, x + size, y - size, x, y);
+            ctx.shadowBlur = 12;
+            
+            ctx.beginPath();
+            let d = size;
+            ctx.moveTo(0, d / 3);
+            ctx.bezierCurveTo(-d, -d / 2, -d * 1.2, d / 2, 0, d * 1.5);
+            ctx.bezierCurveTo(d * 1.2, d / 2, d, -d / 2, 0, d / 3);
+            ctx.closePath();
             ctx.fill();
             ctx.restore();
         }
@@ -337,12 +343,13 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             hearts.forEach((h, index) => {
                 h.y -= h.speedY;
-                h.x += h.speedX;
-                h.opacity -= 0.003;
-                if (h.opacity <= 0) {
+                h.x += h.speedX + Math.sin(h.y / 30) * 0.5; // تموج أنيق في الحركة
+                h.opacity -= 0.002;
+
+                if (h.opacity <= 0 || h.y < -50) {
                     hearts.splice(index, 1);
                 } else {
-                    drawHeart(h.x, h.y, h.size, h.color, h.opacity);
+                    drawVectorHeart(h.x, h.y, h.size, h.color, h.opacity);
                 }
             });
             requestAnimationFrame(animateHearts);
@@ -383,5 +390,5 @@
     </script>
 
 </body>
-                </html>
-                
+        </html>
+        
